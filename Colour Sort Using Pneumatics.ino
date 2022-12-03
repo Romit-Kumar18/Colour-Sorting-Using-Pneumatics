@@ -13,7 +13,7 @@ int t = 500, g = 1, motorpin=11, servopin=9;
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(t,g);
 
 void setup(void) {
-  pinMode(motorpin,OUTPUT);
+  pinMode(motorpin,OUTPUT); //Setting motorpin as output pin
   Serial.begin(9600); //Starting Serial Monitor at Baud Rate 9600
   myservo.attach(servopin); //Attaching Servo Variable to Servopin
 
@@ -58,11 +58,7 @@ void loop(void) {
         //If b is greatest value then Detected Colour is Green
 
       }
-    } //else if (r>b and r>g) {
-      //if (g>b){
-        //colour=5;
-      //}
-    //}
+    }
     if (colour==test){ //Running a counter for number of times the same colour is output, for increased accuracy
       counter++;
       Serial.print(counter);
@@ -75,64 +71,37 @@ void loop(void) {
     test=colour;
     if (counter>=5){ //Once counter reaches 5 it will start moving the motors based on detected colour
       if (colour==1){ //If colour is red
-        //if (r>1000){
-          Serial.print("Red\n");
-          myservo.write(30); //Setting Servo angle 30
-          /*current_angle=myservo.read();
-          if (current_angle==30){ //Checking if the servo has reached its destination
-            Serial.print(current_angle);
-            Serial.print("\n");*/
-            delay(1000);
-            digitalWrite(motorpin,HIGH); //Extending Pneumatic Piston
-            delay(3000); //3 second delay between extension and retraction
-            digitalWrite(motorpin,LOW); //Retracting Pneumatic Piston
-            delay(4000); //4 second delay allow the next ball to fall and be detected
-          //}
-        //}
+        Serial.print("Red\n");
+        myservo.write(30); //Setting Servo angle 30
+        delay(1000); //1 second delay to let the servo reach the required angle
+        digitalWrite(motorpin,HIGH); //Extending Pneumatic Piston
+        delay(3000); //3 second delay between extension and retraction
+        digitalWrite(motorpin,LOW); //Retracting Pneumatic Piston
+        delay(4000); //4 second delay allow the next ball to fall and be detected
       } else if (colour==2) { //Repeat for Blue
-        //if (b>1000){
-          Serial.print("Blue\n");
-          myservo.write(70);
-          /*current_angle=myservo.read();
-          if (current_angle==60){
-            Serial.print(current_angle);
-            Serial.print("\n");*/
-            delay(1000);
-            digitalWrite(motorpin,HIGH);
-            delay(3000);
-            digitalWrite(motorpin,LOW);
-            delay(4000);
-          //}
-        //}
+        Serial.print("Blue\n");
+        myservo.write(70);
+        delay(1000);
+        digitalWrite(motorpin,HIGH);
+        delay(3000);
+        digitalWrite(motorpin,LOW);
+        delay(4000);
       } else if (colour==3) { //Repeat for Yellow
-        //if (g>1000 and r>1000){
-          Serial.print("Yellow\n");
-          myservo.write(110);
-          /*current_angle=myservo.read();
-          if (current_angle==90){
-            Serial.print(current_angle);
-            Serial.print("\n");*/
-            delay(1000);
-            digitalWrite(motorpin,HIGH);
-            delay(3000);
-            digitalWrite(motorpin,LOW);
-            delay(4000);
-          //}
-        //}
+        Serial.print("Yellow\n");
+        myservo.write(110);
+        delay(1000);
+        digitalWrite(motorpin,HIGH);
+        delay(3000);
+        digitalWrite(motorpin,LOW);
+        delay(4000);
       } else if (colour==4) { //Repeat for Green
-        //if (g>1000){
-          Serial.print("Green\n");
-          myservo.write(150);
-          /*current_angle=myservo.read();
-          if (current_angle==120){
-            Serial.print(current_angle);
-            Serial.print("\n");*/
-            delay(1000);
-            digitalWrite(motorpin,HIGH);
-            delay(3000);
-            digitalWrite(motorpin,LOW);
-            delay(4000);
-          //}
+        Serial.print("Green\n");
+        myservo.write(150);
+        delay(1000);
+        digitalWrite(motorpin,HIGH);
+        delay(3000);
+        digitalWrite(motorpin,LOW);
+        delay(4000);
       }
     }
   }
